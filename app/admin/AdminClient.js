@@ -83,7 +83,7 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
                 <tr>
                   <th>#</th>
                   <th>Nome</th>
-                  <th>Nascimento</th>
+                  <th>Telefone</th>
                   <th>Data do registro</th>
                   <th>Comprovante</th>
                 </tr>
@@ -93,7 +93,7 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
                   <tr key={c.id}>
                     <td className={styles.tdNum}>{filtrados.length - i}</td>
                     <td className={styles.tdNome}>{c.nome}</td>
-                    <td>{c.nascimento || '—'}</td>
+                    <td>{c.telefone || '—'}</td>
                     <td>{c.criado_em}</td>
                     <td>
                       {c.foto_url ? (

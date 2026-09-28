@@ -30,13 +30,19 @@ export async function POST(request) {
 
     const formData = await request.formData();
     const nome       = formData.get('nome')?.toString().trim();
-    const nascimento = formData.get('nascimento')?.toString().trim() || null;
+    const telefone   = formData.get('telefone')?.toString().trim() || null;
     const foto       = formData.get('foto'); // File ou null
 
     // Validação básica
     if (!nome) {
       return NextResponse.json(
         { erro: 'O campo nome é obrigatório.' },
+        { status: 400 }
+      );
+    }
+    if (!foto || foto.size === 0) {
+      return NextResponse.json(
+        { erro: 'O anexo do comprovante é obrigatório.' },
         { status: 400 }
       );
     }
@@ -74,7 +80,7 @@ export async function POST(request) {
       }
     }
 
-    const id = await inserirComprovante({ nome, nascimento, foto_url: fotoUrl });
+    const id = await inserirComprovante({ nome, telefone, foto_url: fotoUrl });
 
     // O libsql retorna o ID como BigInt, que o JSON.stringify não aceita.
     // Precisamos converter para string.
