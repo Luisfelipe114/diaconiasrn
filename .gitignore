@@ -42,3 +42,5 @@ next-env.d.ts
 
 # uploads
 /public/uploads
+local.db
+local.db-journal
