@@ -10,9 +10,9 @@ import {
 function InstagramIcon({ size = 24, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
     </svg>
   );
 }
@@ -20,8 +20,8 @@ function InstagramIcon({ size = 24, color = 'currentColor' }) {
 function YoutubeIcon({ size = 24, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill={color} stroke="none"/>
+      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z" />
+      <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill={color} stroke="none" />
     </svg>
   );
 }
@@ -96,7 +96,7 @@ export default function HomePage() {
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <div className={styles.navBrand}>
-            <img src="/logo-diaconiasrn.png" alt="Logo Diaconia" className={styles.navLogo} />
+            <img src="/logo-diaconia.png" alt="Logo Diaconia" className={styles.navLogo} />
             <div>
               <span className={styles.navEyebrow}>Diaconia Territorial</span>
               <span className={styles.navName}>São Raimundo Nonato</span>
@@ -148,7 +148,7 @@ export default function HomePage() {
           </div>
           <div className={styles.heroLogo}>
             <div className={styles.logoGlow} />
-            <img src="/logo-diaconiasrn.png" alt="Brasão da Diaconia" className={styles.logoImg} />
+            <img src="/logo-diaconia.png" alt="Brasão da Diaconia" className={styles.logoImg} />
           </div>
         </div>
         <div className={styles.heroWave} aria-hidden="true">
@@ -341,7 +341,7 @@ export default function HomePage() {
 
       {/* FOOTER */}
       <footer className={styles.footer}>
-        <img src="/logo-diaconiasrn.png" alt="Logo Diaconia" className={styles.footerLogo} />
+        <img src="/logo-diaconia.png" alt="Logo Diaconia" className={styles.footerLogo} />
         <p className={styles.footerName}>Diaconia Territorial São Raimundo Nonato</p>
         <p className={styles.footerSub}>Curralinhos — PI &nbsp;·&nbsp; Arquidiocese de Teresina | Forania Rural I</p>
         <div className={styles.footerLinks}>
