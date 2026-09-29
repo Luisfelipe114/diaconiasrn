@@ -92,6 +92,57 @@
 .semFoto { font-size: 12.5px; color: var(--text-light); }
 .empty { padding: 40px; text-align: center; color: var(--text-light); font-size: 14px; }
 
+/* STATUS BADGES */
+.badgeValido, .badgeInvalido, .badgePendente {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 50px; font-size: 11.5px; font-weight: 700;
+  text-transform: uppercase;
+}
+.badgeValido { background: #e6f6ee; color: #16a34a; border: 1px solid #c2e5d3; }
+.badgeInvalido { background: #fbeae9; color: var(--bordo); border: 1px solid #f4c2c0; }
+.badgePendente { background: #fff5e6; color: #d97706; border: 1px solid #fce2c2; }
+
+/* ACOES STATUS */
+.acoesStatus { display: flex; align-items: center; gap: 8px; }
+.btnValidar, .btnInvalidar {
+  width: 32px; height: 32px; border-radius: 8px; border: none;
+  display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.btnValidar { background: #e6f6ee; color: #16a34a; }
+.btnValidar:hover { background: #16a34a; color: #fff; transform: translateY(-1px); }
+.btnInvalidar { background: #fbeae9; color: var(--bordo); }
+.btnInvalidar:hover { background: var(--bordo); color: #fff; transform: translateY(-1px); }
+
+/* DIALOG */
+.dialogBox {
+  background: var(--white); border-radius: 20px;
+  padding: 24px; max-width: 440px; width: 100%;
+  position: relative; box-shadow: var(--shadow-lg);
+  text-align: center;
+}
+.dialogTitle { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+.dialogText { font-size: 14.5px; color: var(--text-mid); line-height: 1.6; margin-bottom: 24px; }
+.dialogBtns { display: flex; gap: 12px; justify-content: center; }
+.btnCancel {
+  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  background: var(--cream); border: 1px solid var(--gray-border); color: var(--text-mid);
+  transition: var(--transition);
+}
+.btnCancel:hover { background: var(--cream-dark); }
+.btnConfirmValid {
+  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  background: #16a34a; border: none; color: #fff;
+  transition: var(--transition);
+}
+.btnConfirmValid:hover { background: #15803d; }
+.btnConfirmInvalid {
+  padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+  background: var(--bordo); border: none; color: #fff;
+  transition: var(--transition);
+}
+.btnConfirmInvalid:hover { background: var(--bordo-dark); }
+
 /* MODAL */
 .modalOverlay {
   position: fixed; inset: 0;

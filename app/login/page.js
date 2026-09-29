@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { signIn }   from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { Lock } from 'lucide-react';
 import styles from './login.module.css';
 
 export default function LoginPage() {
@@ -38,7 +39,7 @@ export default function LoginPage() {
   return (
     <main className={styles.main}>
       <div className={styles.card}>
-        <div className={styles.icon}>🔐</div>
+        <div className={styles.icon}><Lock size={32} /></div>
         <h1 className={styles.title}>Painel Administrativo</h1>
         <p className={styles.subtitle}>Diaconia Territorial São Raimundo Nonato</p>
 

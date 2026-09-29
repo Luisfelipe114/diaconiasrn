@@ -2,13 +2,17 @@
 
 import { useState }    from 'react';
 import { signOut }     from 'next-auth/react';
+import { useRouter }   from 'next/navigation';
+import Link            from 'next/link';
+import { CheckCircle2, XCircle, Clock } from 'lucide-react';
 import styles          from './admin.module.css';
 
 export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail }) {
   const [busca, setBusca]         = useState('');
   const [saindo, setSaindo]       = useState(false);
   const [fotoModal, setFotoModal] = useState(null);
-
+  const [confirmDialog, setConfirmDialog] = useState(null);
+  const router = useRouter();
 
   const filtrados = comprovantes.filter(c =>
     c.nome?.toLowerCase().includes(busca.toLowerCase())
@@ -17,6 +21,24 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
   async function handleLogout() {
     setSaindo(true);
     await signOut({ callbackUrl: '/login' });
+  }
+
+  async function alterarStatus(id, novoStatus) {
+    try {
+      const res = await fetch(`/api/comprovantes/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: novoStatus })
+      });
+      if (res.ok) {
+        setConfirmDialog(null);
+        router.refresh(); // atualiza a prop comprovantes do server
+      } else {
+        alert('Erro ao atualizar status.');
+      }
+    } catch (err) {
+      alert('Erro de conexão.');
+    }
   }
 
   return (
@@ -33,6 +55,9 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
               <span className={styles.userName}>{usuarioNome}</span>
               <span className={styles.userEmail}>{usuarioEmail}</span>
             </div>
+            <Link href="/" className={styles.btnLogout} style={{ textDecoration: 'none', background: 'var(--cream)', color: 'var(--bordo)' }}>
+              ← Início
+            </Link>
             <button className={styles.btnLogout} onClick={handleLogout} disabled={saindo}>
               {saindo ? 'Saindo…' : '↩ Sair'}
             </button>
@@ -42,26 +67,6 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
 
 
       <main className={styles.main}>
-        {/* RESUMO */}
-        <div className={styles.statsRow}>
-          <div className={styles.statCard}>
-            <span className={styles.statNum}>{comprovantes.length}</span>
-            <span className={styles.statLabel}>Total de registros</span>
-          </div>
-          <div className={styles.statCard}>
-            <span className={styles.statNum}>
-              {comprovantes.filter(c => c.foto_url).length}
-            </span>
-            <span className={styles.statLabel}>Com comprovante</span>
-          </div>
-          <div className={styles.statCard}>
-            <span className={styles.statNum}>
-              {comprovantes.filter(c => !c.foto_url).length}
-            </span>
-            <span className={styles.statLabel}>Sem comprovante</span>
-          </div>
-        </div>
-
         {/* BUSCA */}
         <div className={styles.searchWrap}>
           <input
@@ -86,6 +91,8 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
                   <th>Telefone</th>
                   <th>Data do registro</th>
                   <th>Comprovante</th>
+                  <th>Status</th>
+                  <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -107,6 +114,29 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
                         <span className={styles.semFoto}>Não enviado</span>
                       )}
                     </td>
+                    <td>
+                      {c.status === 'valido' && <span className={styles.badgeValido}><CheckCircle2 size={14}/> Válido</span>}
+                      {c.status === 'invalido' && <span className={styles.badgeInvalido}><XCircle size={14}/> Inválido</span>}
+                      {(!c.status || c.status === 'pendente') && <span className={styles.badgePendente}><Clock size={14}/> Pendente</span>}
+                    </td>
+                    <td>
+                      <div className={styles.acoesStatus}>
+                        <button 
+                          className={styles.btnValidar} 
+                          title="Marcar como Válido"
+                          onClick={() => setConfirmDialog({ id: c.id, nome: c.nome, action: 'valido' })}
+                        >
+                          <CheckCircle2 size={16} />
+                        </button>
+                        <button 
+                          className={styles.btnInvalidar}
+                          title="Marcar como Inválido" 
+                          onClick={() => setConfirmDialog({ id: c.id, nome: c.nome, action: 'invalido' })}
+                        >
+                          <XCircle size={16} />
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -125,6 +155,30 @@ export default function AdminClient({ comprovantes, usuarioNome, usuarioEmail })
             <a href={fotoModal} target="_blank" rel="noopener noreferrer" className={styles.btnDownload}>
               ⬇ Abrir em nova aba
             </a>
+          </div>
+        </div>
+      )}
+
+      {/* MODAL DE CONFIRMACAO */}
+      {confirmDialog && (
+        <div className={styles.modalOverlay} onClick={() => setConfirmDialog(null)}>
+          <div className={styles.dialogBox} onClick={e => e.stopPropagation()}>
+            <h3 className={styles.dialogTitle}>Confirmar Ação</h3>
+            <p className={styles.dialogText}>
+              Tem certeza que deseja marcar o comprovante de <strong>{confirmDialog.nome}</strong> como{' '}
+              <strong style={{ color: confirmDialog.action === 'valido' ? 'var(--green)' : 'var(--bordo)' }}>
+                {confirmDialog.action === 'valido' ? 'VÁLIDO' : 'INVÁLIDO'}
+              </strong>?
+            </p>
+            <div className={styles.dialogBtns}>
+              <button className={styles.btnCancel} onClick={() => setConfirmDialog(null)}>Cancelar</button>
+              <button 
+                className={confirmDialog.action === 'valido' ? styles.btnConfirmValid : styles.btnConfirmInvalid} 
+                onClick={() => alterarStatus(confirmDialog.id, confirmDialog.action)}
+              >
+                Confirmar
+              </button>
+            </div>
           </div>
         </div>
       )}

@@ -1,4 +1,4 @@
-﻿/* home.module.css — Homepage Institucional Diaconia */
+/* home.module.css — Homepage Institucional Diaconia */
 
 .page { min-height: 100vh; background: var(--cream); overflow-x: hidden; }
 
@@ -111,4 +111,50 @@
   .pilares { padding: 60px 0; }
   .dizimoCta { padding: 60px 20px; }
   .links { padding: 60px 0; }
+}
+
+/* NAV LINKS */
+.navLinks { display: flex; align-items: center; gap: 6px; }
+.navLink { font-size: 13px; font-weight: 600; color: var(--text-mid); padding: 7px 14px; border-radius: 50px; transition: var(--transition); }
+.navLink:hover { color: var(--bordo); background: var(--cream-dark); }
+
+/* AGENDA */
+.agenda { background: var(--white); padding: 80px 0; }
+.agendaGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+.agendaCards { display: flex; flex-direction: column; gap: 16px; }
+.agendaCard { display: flex; align-items: flex-start; gap: 18px; background: var(--cream); border: 1px solid var(--cream-dark); border-radius: 18px; padding: 22px 24px; transition: var(--transition); }
+.agendaCard:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.agendaCardIcon { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, var(--bordo), var(--bordo-dark)); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; }
+.agendaCardDia { display: block; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.agendaCardHora { display: flex; align-items: center; gap: 5px; font-size: 13px; color: var(--text-mid); margin-bottom: 4px; }
+.agendaCardLocal { display: flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--text-light); }
+
+/* EQUIPE */
+.equipe { background: var(--white); padding: 80px 0; }
+.equipeGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.equipeCard { background: var(--cream); border: 1px solid var(--cream-dark); border-radius: 24px; padding: 36px 24px; text-align: center; transition: var(--transition); }
+.equipeCard:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.equipeAvatar { width: 72px; height: 72px; border-radius: 50%; background: linear-gradient(135deg, var(--bordo), var(--gold)); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: #fff; margin: 0 auto 16px; font-family: var(--font-cormorant); }
+.equipeNome { display: block; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.equipeCargo { display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px; color: var(--text-light); }
+
+/* LOCALIZACAO */
+.localizacao { background: var(--cream); padding: 80px 0; }
+.mapCard { margin-top: 36px; border-radius: 20px; overflow: hidden; border: 1.5px solid var(--cream-dark); box-shadow: var(--shadow-sm); }
+
+/* MIDIAS */
+.midias { background: var(--cream-mid); padding: 80px 0; }
+.midiasGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+.midiaCard { display: flex; align-items: center; gap: 18px; background: var(--white); border: 1.5px solid var(--cream-dark); border-radius: 18px; padding: 22px; transition: var(--transition); box-shadow: var(--shadow-sm); text-decoration: none; color: inherit; min-width: 0; }
+.midiaCard:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--gold); }
+.midiaCardIcon { width: 56px; height: 56px; border-radius: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.midiaCardBody { flex: 1; min-width: 0; }
+.midiaCardTitulo { display: block; font-size: 16px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+.midiaCardDesc { font-size: 12.5px; color: var(--text-light); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.midiaCardArrow { margin-left: auto; color: var(--bordo); flex-shrink: 0; }
+
+/* RESPONSIVE extras */
+@media (max-width: 840px) {
+  .agendaGrid { grid-template-columns: 1fr; gap: 32px; }
+  .navLinks { display: none; }
 }

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from 'react';
 import Link from 'next/link';
+import { Heart, ClipboardCopy, CheckCircle2, CloudUpload, FileText, X } from 'lucide-react';
 import styles from './page.module.css';
 
 const PIX_KEY = process.env.NEXT_PUBLIC_PIX_KEY || '86995982235';
@@ -132,7 +133,7 @@ export default function ComprovantePage() {
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <Link href="/" className={styles.btnHeaderPix} style={{ textDecoration: 'none' }}>← Início</Link>
             <button className={styles.btnHeaderPix} onClick={() => document.getElementById('pix-section').scrollIntoView({ behavior: 'smooth', block: 'center' })}>
-              <span>♥</span> Devolva seu dízimo
+              <Heart size={16} fill="currentColor" /> Devolva seu dízimo
             </button>
           </div>
         </div>
@@ -161,7 +162,7 @@ export default function ComprovantePage() {
                   <p className={styles.pixValue}>{PIX_KEY}</p>
                 </div>
                 <button className={styles.btnToqueCopiar} onClick={copyPix}>
-                  📋 Toque para copiar
+                  <ClipboardCopy size={18} /> Toque para copiar
                 </button>
               </div>
             </div>
@@ -198,7 +199,7 @@ export default function ComprovantePage() {
 
             {enviado ? (
               <div className={styles.successState}>
-                <div className={styles.successIcon}>✓</div>
+                <div className={styles.successIcon}><CheckCircle2 size={48} /></div>
                 <h3>Comprovante salvo com sucesso!</h3>
                 <button 
                   type="button" 
@@ -250,13 +251,13 @@ export default function ComprovantePage() {
                   >
                     {!fotoFile ? (
                       <div className={styles.uploadPlaceholder}>
-                        <span className={styles.uploadIcon}>☁</span>
+                        <span className={styles.uploadIcon}><CloudUpload size={24} /></span>
                         <span>Toque para selecionar a foto</span>
                         <small>JPG, PNG ou PDF</small>
                       </div>
                     ) : fotoPreview === 'pdf' ? (
                       <div className={styles.uploadPdf}>
-                        <span style={{ fontSize: 42, color: '#c0392b' }}>📄</span>
+                        <FileText size={42} color="#c0392b" />
                         <span>{fotoFile.name}</span>
                       </div>
                     ) : (
@@ -268,7 +269,7 @@ export default function ComprovantePage() {
                           className={styles.btnRemoveImg}
                           onClick={removerFoto}
                           aria-label="Remover imagem"
-                        >✕</button>
+                        ><X size={16} /></button>
                       </div>
                     )}
                   </label>
@@ -296,7 +297,7 @@ export default function ComprovantePage() {
             
             <div className={styles.footerDeco} aria-hidden="true" style={{ marginTop: 36, marginBottom: 8 }}>
               <span className={styles.decoLine} />
-              <span className={styles.decoHeart}>♥</span>
+              <span className={styles.decoHeart}><Heart size={16} fill="currentColor" /></span>
               <span className={styles.decoLine} />
             </div>
           </section>
@@ -311,7 +312,7 @@ export default function ComprovantePage() {
 
       {/* TOAST */}
       <div className={`${styles.toast} ${toastVisible ? styles.toastShow : ''}`} role="status" aria-live="polite">
-        ✅ <span>{toastMsg}</span>
+        <CheckCircle2 size={18} /> <span>{toastMsg}</span>
       </div>
     </>
   );
