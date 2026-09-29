@@ -58,25 +58,33 @@ export async function POST(request) {
       const nomeLimpo = foto.name.replace(/[^a-zA-Z0-9.-]/g, '_');
       const nomeArquivo = `comprovantes/${Date.now()}-${nomeLimpo}`;
 
-      // Vercel Blob (Produção)
+      // Vercel Blob (Produção - se configurado)
       if (process.env.BLOB_READ_WRITE_TOKEN) {
         const blob = await put(nomeArquivo, foto, { access: 'public' });
         fotoUrl = blob.url;
       } 
-      // Salvar fisicamente no disco (Dev/Local)
+      // Fallback
       else {
         const bytes = await foto.arrayBuffer();
         const buffer = Buffer.from(bytes);
-        
-        // Pasta public/uploads
-        const uploadDir = join(process.cwd(), 'public', 'uploads');
-        await mkdir(uploadDir, { recursive: true });
-        
-        const fileName = `${Date.now()}-${nomeLimpo}`;
-        const filePath = join(uploadDir, fileName);
-        await writeFile(filePath, buffer);
-        
-        fotoUrl = `/uploads/${fileName}`;
+
+        // Se estivermos na Vercel (onde /public é read-only), salva como Base64
+        if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+          const base64 = buffer.toString('base64');
+          const mimeType = foto.type || 'image/jpeg';
+          fotoUrl = `data:${mimeType};base64,${base64}`;
+        } 
+        // Se estivermos em ambiente local, salva no disco (pasta public)
+        else {
+          const uploadDir = join(process.cwd(), 'public', 'uploads');
+          await mkdir(uploadDir, { recursive: true });
+          
+          const fileName = `${Date.now()}-${nomeLimpo}`;
+          const filePath = join(uploadDir, fileName);
+          await writeFile(filePath, buffer);
+          
+          fotoUrl = `/uploads/${fileName}`;
+        }
       }
     }
 
