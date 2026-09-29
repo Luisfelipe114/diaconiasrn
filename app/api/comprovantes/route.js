@@ -90,8 +90,6 @@ export async function POST(request) {
 
     const id = await inserirComprovante({ nome, telefone, foto_url: fotoUrl });
 
-    // O libsql retorna o ID como BigInt, que o JSON.stringify não aceita.
-    // Precisamos converter para string.
     return NextResponse.json({ sucesso: true, id: id.toString() }, { status: 201 });
   } catch (error) {
     console.error('Erro ao salvar comprovante:', error);

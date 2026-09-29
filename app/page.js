@@ -26,6 +26,8 @@ function YoutubeIcon({ size = 24, color = 'currentColor' }) {
   );
 }
 import styles from './home.module.css';
+import SobreSection from './SobreSection';
+import MemoriasSection from './MemoriasSection';
 
 export const metadata = {
   title: 'Diaconia Territorial São Raimundo Nonato — Curralinhos, PI',
@@ -94,7 +96,7 @@ export default function HomePage() {
       <nav className={styles.nav}>
         <div className={styles.navInner}>
           <div className={styles.navBrand}>
-            <img src="/logo-diaconia.png" alt="Logo Diaconia" className={styles.navLogo} />
+            <img src="/logo-diaconiasrn.png" alt="Logo Diaconia" className={styles.navLogo} />
             <div>
               <span className={styles.navEyebrow}>Diaconia Territorial</span>
               <span className={styles.navName}>São Raimundo Nonato</span>
@@ -146,7 +148,7 @@ export default function HomePage() {
           </div>
           <div className={styles.heroLogo}>
             <div className={styles.logoGlow} />
-            <img src="/logo-diaconia.png" alt="Brasão da Diaconia" className={styles.logoImg} />
+            <img src="/logo-diaconiasrn.png" alt="Brasão da Diaconia" className={styles.logoImg} />
           </div>
         </div>
         <div className={styles.heroWave} aria-hidden="true">
@@ -287,6 +289,12 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* SOBRE A DIACONIA */}
+      <SobreSection />
+
+      {/* MEMORIAS */}
+      <MemoriasSection />
+
       {/* MIDIAS */}
       <section className={styles.midias} id="midias">
         <div className={styles.sectionInner}>
@@ -333,7 +341,7 @@ export default function HomePage() {
 
       {/* FOOTER */}
       <footer className={styles.footer}>
-        <img src="/logo-diaconia.png" alt="Logo Diaconia" className={styles.footerLogo} />
+        <img src="/logo-diaconiasrn.png" alt="Logo Diaconia" className={styles.footerLogo} />
         <p className={styles.footerName}>Diaconia Territorial São Raimundo Nonato</p>
         <p className={styles.footerSub}>Curralinhos — PI &nbsp;·&nbsp; Arquidiocese de Teresina | Forania Rural I</p>
         <div className={styles.footerLinks}>
